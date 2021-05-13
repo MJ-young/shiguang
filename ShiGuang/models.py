@@ -45,7 +45,7 @@ class Food(models.Model):
     fid = models.IntegerField(primary_key=True, verbose_name='食物id')
     fcid = models.ForeignKey('FoodCategory', on_delete=models.CASCADE, verbose_name='食物类别id')
     fn = models.CharField(max_length=256, verbose_name='食物名称')
-    fk = models.IntegerField(verbose_name='每克卡路里')
+    fk = models.FloatField(verbose_name='每克卡路里')
     ap = models.CharField(max_length=256, verbose_name='适宜人群')
     nap = models.CharField(max_length=256, verbose_name='不适人群')
     fp = models.CharField(max_length=256, verbose_name='食物图片')

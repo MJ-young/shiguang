@@ -21,4 +21,6 @@ urlpatterns = [
     path('login/', views.login),
     path('getfood/', views.getfood),
     path('search/', views.search),
+    path('searchByPage/', views.searchByPage),
+    path('findByInput/', views.findByInput)
 ]
