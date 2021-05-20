@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import studd,S,User,Food,Nutrition
+from .models import studd,S,User,Food,Nutrition,Sports,SportsCategory
 from django.shortcuts import HttpResponse
 from django.http import JsonResponse
 # Create your views here.
@@ -73,7 +73,7 @@ def searchByPage(request):
         foodid = objs[i].fid
         result[-1]['id'] = foodid
         result[-1]['foodcalorie'] = objs[i].fk
-        # result[-1]['ap'] = objs[i].ap
+        # result[-1]['foodimage'] = objs[i].fp
         result[-1]['foodname'] = objs[i].fn
         nutrition = Nutrition.objects.filter(fid=foodid)
         result[-1]['carbohydrate'] = nutrition[0].nc
@@ -116,6 +116,48 @@ def findByInput(request):
     return JsonResponse({'code': 1, 'data': result, 'total': total})
 
 
+def sportByPage(request):
+    type = request.GET.get('type')
+    pageSize = int(request.GET.get('pageSize'))
+    currentPage = int(request.GET.get('pageIndex'))
+    fromIndex = pageSize*(currentPage-1)
+    endIndex = fromIndex+pageSize
+    total = Sports.objects.filter(scid_id=type).count()
+    print('运动种类：', type)
+    objs = Sports.objects.filter(scid_id=type)[fromIndex:endIndex]
+    result = []
+    for i in range(len(objs)):
+        result.append({})
+        sportid = objs[i].sid
+        result[-1]['sportname'] = objs[i].sn
+        result[-1]['id'] = sportid
+        result[-1]['sportcalorie'] = objs[i].sk
+        # result[-1]['sportimage'] = objs[i].sp
+    print(result)
+    return JsonResponse({'code': 1, 'data': result, 'total': total})
+
+
+def findSportByInput(request):
+    sportname = request.GET.get('sportname')
+    pageSize = int(request.GET.get('pageSize'))
+    currentPage = int(request.GET.get('pageIndex'))
+    fromIndex = pageSize*(currentPage-1)
+    endIndex = fromIndex+pageSize
+    total = Sports.objects.filter(sn__contains=sportname).count()
+    objs = Sports.objects.filter(sn__contains=sportname)[fromIndex:endIndex]
+    result = []
+    for i in range(len(objs)):
+        result.append({})
+        sportid = objs[i].sid
+        result[-1]['sportname'] = objs[i].sn
+        result[-1]['id'] = sportid
+        result[-1]['sportcalorie'] = objs[i].sk
+        # result[-1]['sportimage'] = objs[i].sp
+    print(result)
+    print(total)
+    return JsonResponse({'code': 1, 'data': result, 'total': total})
+
+
 def loginn(request):
     objs = S.objects.filter()
     # print(objs)
@@ -138,6 +180,8 @@ def loginn(request):
 
 def regist(request):
     return render(request,'regist.html')
+
+
 class UserController:
     def userLogin(request):
         if request.method == 'POST':

@@ -22,5 +22,7 @@ urlpatterns = [
     path('getfood/', views.getfood),
     path('search/', views.search),
     path('searchByPage/', views.searchByPage),
-    path('findByInput/', views.findByInput)
+    path('findByInput/', views.findByInput),
+    path('sportByPage/', views.sportByPage),
+    path('findSportByInput/', views.findSportByInput)
 ]
