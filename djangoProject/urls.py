@@ -21,11 +21,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include("ShiGuang.urls")),
     path('login/',view.login),
-    path('regist/',view.regist),
-    # 访问注册界面
-    # http://127.0.0.1:8000/userRegist/，会执行views中Usercontrller的regist方法，下一个相同的道理
-    path('userRegist/', view.UserController.userRegist),
-    path('userLogin/', view.UserController.userLogin),
-    # http://127.0.0.1:8000/userinfo/{这里需要一个整形参数，参数命名为id}/，这样的url会执行views中Usercontrller的userInfo方法，
-    path('userinfo/<int:id>', view.UserController.userInfo)
 ]

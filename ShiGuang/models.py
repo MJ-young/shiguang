@@ -119,6 +119,7 @@ class DietRecord(models.Model):
     fid = models.ForeignKey('Food', on_delete=models.CASCADE, verbose_name='食物id')
     fw = models.IntegerField(verbose_name='食物重量')
     dd = models.DateField(verbose_name='饮食日期')
+    fkk = models.IntegerField(verbose_name='食物热量')
 
     class Meta:
         verbose_name = '饮食记录表'
@@ -129,8 +130,9 @@ class SportsRecord(models.Model):
     userid = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='用户id')
     srid = models.IntegerField(primary_key=True, verbose_name='运动记录id')
     sid = models.ForeignKey('Sports', on_delete=models.CASCADE, verbose_name='运动id')
-    st = models.IntegerField(verbose_name='运动时长')
+    st = models.FloatField(verbose_name='运动时长')
     sd = models.DateField(verbose_name='运动日期')
+    skk = models.FloatField(verbose_name='消耗热量')
 
     class Meta:
         verbose_name = '运动记录表'
